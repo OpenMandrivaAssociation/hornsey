@@ -18,7 +18,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
 BuildRequires: clutter-gtk-devel
-BuildRequires: bickley-devel
+BuildRequires: libbickley-devel
 BuildRequires: nbtk-devel
 BuildRequires: startup-notification-devel
 BuildRequires: unique-devel
