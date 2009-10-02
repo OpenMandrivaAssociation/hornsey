@@ -18,10 +18,10 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
 BuildRequires: clutter-gtk-devel
-BuildRequires: libbickley-devel
-BuildRequires: libnbtk-devel
+BuildRequires: bickley-devel
+BuildRequires: nbtk-devel
 BuildRequires: startup-notification-devel
-BuildRequires: libunique-devel
+BuildRequires: unique-devel
 BuildRequires: bognor-regis-devel
 BuildRequires: gnome-common
 BuildRequires: intltool
