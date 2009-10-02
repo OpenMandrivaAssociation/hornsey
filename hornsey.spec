@@ -36,7 +36,7 @@ The Moblin media player
 %setup -q -n %{name}-%{sversion}
 
 %build
-./autogen.sh
+NOCONFIGURE=1 ./autogen.sh
 %configure2_5x
 %make
 
