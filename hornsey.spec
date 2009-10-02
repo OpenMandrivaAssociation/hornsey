@@ -1,6 +1,6 @@
 Name: hornsey
 Summary: The Moblin media player
-Group: Applications/Multimedia
+Group: Graphical desktop/Other
 Version: 0.5git20091001
 License: LGPLv2.1
 URL: http://www.moblin.org
