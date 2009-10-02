@@ -1,11 +1,18 @@
+%define version 0.5
+%define rel 1
+%define snapshot git20091001
+%define release %mkrel 0.%{snapshot}.%{rel}
+
+%define sversion %{version}%{snapshot}
+
 Name: hornsey
 Summary: The Moblin media player
 Group: Graphical desktop/Other
-Version: 0.5git20091001
+Version: %{version}
 License: LGPLv2.1
 URL: http://www.moblin.org
-Release: %mkrel 1
-Source0: %{name}-%{version}.tar.gz
+Release: %{release}
+Source0: %{name}-%{sversion}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 BuildRequires: clutter-devel
@@ -26,7 +33,7 @@ BuildRequires: libxtst-devel
 The Moblin media player
 
 %prep
-%setup -q 
+%setup -q -n %{name}-%{sversion}
 
 %build
 ./autogen.sh
