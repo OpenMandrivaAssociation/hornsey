@@ -22,8 +22,6 @@ BuildRequires: gettext
 BuildRequires: libnotify-devel
 BuildRequires: libxtst-devel
 
-Requires(post): /bin/touch
-
 %description
 The Moblin media player
 
@@ -41,11 +39,6 @@ rm -rf %{buildroot}
 
 %clean
 rm -rf %{buildroot}
-
-%post 
-/bin/touch --no-create %{_datadir}/icons/hicolor || :
-%{_bindir}/gtk-update-icon-cache \
-  --quiet %{_datadir}/icons/hicolor 2> /dev/null|| :
 
 %files 
 %defattr(-,root,root,-)
