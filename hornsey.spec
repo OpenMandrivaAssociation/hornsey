@@ -22,7 +22,6 @@ BuildRequires: gettext
 BuildRequires: libnotify-devel
 BuildRequires: libxtst-devel
 
-Requires: libbickley0
 Requires(post): /bin/touch
 
 %description
