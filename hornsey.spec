@@ -15,7 +15,7 @@ BuildRequires: libbickley-devel
 BuildRequires: libnbtk-devel
 BuildRequires: startup-notification-devel
 BuildRequires: libunique-devel
-BuildRequires: libbognor-regis-devel
+BuildRequires: bognor-regis-devel
 BuildRequires: gnome-common
 BuildRequires: intltool
 BuildRequires: gettext
