@@ -1,5 +1,5 @@
 %define version 0.5
-%define rel 2
+%define rel 3
 %define snapshot git20091001
 %define release %mkrel 0.%{snapshot}.%{rel}
 
@@ -18,7 +18,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
 BuildRequires: clutter-gtk-devel
-BuildRequires: libbickley-devel
+BuildRequires: bickley-devel
 BuildRequires: nbtk-devel
 BuildRequires: startup-notification-devel
 BuildRequires: unique-devel
