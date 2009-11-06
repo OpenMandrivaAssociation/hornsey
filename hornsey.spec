@@ -1,6 +1,6 @@
 %define version 0.5
 %define rel 1
-%define snapshot git20091028
+%define snapshot git20091030
 %define release %mkrel 0.%{snapshot}.%{rel}
 
 %define sversion %{version}%{snapshot}
@@ -14,6 +14,11 @@ URL: http://www.moblin.org
 Release: %{release}
 Source0: %{name}-%{sversion}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+
+# patches commited after moblin-2.1 was tagged
+Patch0: hornsey-0.5-fix-6876-crash.patch
+Patch1: hornsey-0.5-fix-7358-scrollbar.patch
+Patch2: hornsey-0.5-fix-7807-cpu.patch
 
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
@@ -34,6 +39,9 @@ The Moblin media player
 
 %prep
 %setup -q -n %{name}-%{sversion}
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 NOCONFIGURE=1 ./autogen.sh
