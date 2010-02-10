@@ -1,5 +1,5 @@
 %define version 0.5
-%define rel 1
+%define rel 2
 %define snapshot git20091030
 %define release %mkrel 0.%{snapshot}.%{rel}
 
@@ -19,7 +19,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Patch0: hornsey-0.5-fix-6876-crash.patch
 Patch1: hornsey-0.5-fix-7358-scrollbar.patch
 Patch2: hornsey-0.5-fix-7807-cpu.patch
-
+Patch3: hornsey-0.5git20091030-new-clutter-gst.patch
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
 BuildRequires: clutter-gtk-devel
@@ -39,9 +39,7 @@ The Moblin media player
 
 %prep
 %setup -q -n %{name}-%{sversion}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
+%apply_patches
 
 %build
 NOCONFIGURE=1 ./autogen.sh
