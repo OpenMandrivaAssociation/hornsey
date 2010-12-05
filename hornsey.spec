@@ -1,5 +1,5 @@
 %define version 0.5
-%define rel 2
+%define rel 3
 %define snapshot git20091030
 %define release %mkrel 0.%{snapshot}.%{rel}
 
