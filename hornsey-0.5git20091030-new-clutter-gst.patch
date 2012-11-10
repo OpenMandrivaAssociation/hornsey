@@ -1,0 +1,12 @@
+diff -p -up hornsey-0.5git20091030/configure.ac~ hornsey-0.5git20091030/configure.ac
+--- hornsey-0.5git20091030/configure.ac~	2009-10-30 17:54:46.000000000 +0100
++++ hornsey-0.5git20091030/configure.ac	2010-02-10 11:49:28.000000000 +0100
+@@ -39,7 +39,7 @@ if test "x$use_helix" = "xyes"; then
+   DEPS_PACKAGES="${DEPS_PACKAGES} clutter-helix-1.0"
+   AC_DEFINE(USE_HELIX,1,[Define if we want to use Helix])
+ else
+-  DEPS_PACKAGES="${DEPS_PACKAGES} clutter-gst-0.10"
++  DEPS_PACKAGES="${DEPS_PACKAGES} clutter-gst-1.0"
+ fi
+ 
+  PKG_CHECK_MODULES(DEPS, "$DEPS_PACKAGES")

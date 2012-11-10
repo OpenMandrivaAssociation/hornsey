@@ -1,0 +1,27 @@
+From e4e2eb7057d2892c3008fff88dbafb92dc7d90b3 Mon Sep 17 00:00:00 2001
+From: iain <iain@linux.intel.com>
+Date: Tue, 03 Nov 2009 12:08:54 +0000
+Subject: Fix 6876 - Hornsey will crash occasionally when removing/adding media
+
+When we remove all the content of one type the root node was being destroyed.
+Then when adding content of that type again, the root node was invalid memory
+---
+diff --git a/src/hrn-cluster-tree.c b/src/hrn-cluster-tree.c
+index 14e0c72..5911403 100644
+--- a/src/hrn-cluster-tree.c
++++ b/src/hrn-cluster-tree.c
+@@ -939,6 +939,12 @@ remove_child_from_parent (HrnClusterNode *child,
+     hrn_cluster_node_remove_child (parent, child);
+     g_object_unref (child);
+ 
++    if (parent->type == HRN_CLUSTER_NODE_TYPE_AUDIO_ROOT ||
++        parent->type == HRN_CLUSTER_NODE_TYPE_IMAGE_ROOT ||
++        parent->type == HRN_CLUSTER_NODE_TYPE_VIDEO_ROOT) {
++        return;
++    }
++
+     /* Check if the parent has any children left,
+        it might need removed too */
+     if (g_sequence_get_length (parent->children) == 0) {
+--
+cgit v0.8.2

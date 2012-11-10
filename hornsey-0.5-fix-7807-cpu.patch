@@ -1,0 +1,31 @@
+From 41810a84a2256ff2008bb2f8e5fd19c4174b610e Mon Sep 17 00:00:00 2001
+From: iain <iain@linux.intel.com>
+Date: Wed, 04 Nov 2009 14:43:20 +0000
+Subject: Fix 7807 - Hornsey's spinner eats CPU for breakfast
+
+Only queue a redraw when the frame actually changes.
+---
+diff --git a/src/hrn-spinner.c b/src/hrn-spinner.c
+index baa07ff..7a3b8d6 100644
+--- a/src/hrn-spinner.c
++++ b/src/hrn-spinner.c
+@@ -122,11 +122,16 @@ new_frame_cb (ClutterTimeline *timeline,
+               HrnSpinner      *self)
+ {
+     HrnSpinnerPrivate *priv = self->priv;
++    int old_frame;
++
++    old_frame = priv->frame;
+ 
+     /* We go from 1->23 frames */
+     priv->frame = (22 * ((float) msecs / 1000.0)) + 1;
+ 
+-    clutter_actor_queue_redraw ((ClutterActor *) self);
++    if (priv->frame != old_frame) {
++        clutter_actor_queue_redraw ((ClutterActor *) self);
++    }
+ }
+ 
+ static void
+--
+cgit v0.8.2

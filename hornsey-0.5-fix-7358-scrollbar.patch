@@ -1,0 +1,99 @@
+From 37c231288da5d743fea24fd6be8352681a6cefd4 Mon Sep 17 00:00:00 2001
+From: iain <iain@linux.intel.com>
+Date: Tue, 03 Nov 2009 16:33:53 +0000
+Subject: Fix 7358 -  Scrollbar is missing if switch between album view and item view
+
+When changing levels, count the number of items correctly
+---
+diff --git a/src/hrn-cluster.c b/src/hrn-cluster.c
+index d13ce4f..2b68f87 100644
+--- a/src/hrn-cluster.c
++++ b/src/hrn-cluster.c
+@@ -564,7 +564,6 @@ tiler_set_expanded (HrnTiler *tiler,
+             }
+ 
+             priv->count += hrn_tileable_get_count ((HrnTileable *) child);
+-
+             iter = g_sequence_iter_next (iter);
+             i++;
+         }
+@@ -595,6 +594,7 @@ tiler_set_expanded (HrnTiler *tiler,
+         clutter_actor_set_reactive ((ClutterActor *) cluster, TRUE);
+         hrn_tileable_item_count_changed ((HrnTileable *) cluster,
+                                          priv->count, 1);
++        priv->count = 1;
+ 
+         if (priv->items_exist == TRUE) {
+             destroy_items (cluster);
+@@ -797,7 +797,11 @@ tileable_get_count (HrnTileable *tileable)
+     HrnClusterPrivate *priv = cluster->priv;
+ 
+     if (priv->expanded) {
+-        return priv->count + 1; /* + 1 for the up button */
++        if (priv->shown_child) {
++            return hrn_tileable_get_count (priv->shown_child);
++        } else {
++            return priv->count + 1;
++        }
+     } else {
+         return 1;
+     }
+@@ -1089,27 +1093,6 @@ child_activated_cb (HrnTileable      *tileable,
+         hrn_tiler_set_expanded ((HrnTiler *) cluster, FALSE);
+         hrn_tileable_activated ((HrnTileable *) cluster,
+                                 HRN_TILEABLE_ACTION_SHOW_ALL, cluster);
+-#if 0
+-        iter = g_sequence_get_begin_iter (priv->node->children);
+-        while (g_sequence_iter_is_end (iter) == FALSE) {
+-            HrnClusterNode *child_node = g_sequence_get (iter);
+-            ClutterActor *child;
+-
+-            child = g_hash_table_lookup (priv->child_items, child_node);
+-            if (child == NULL) {
+-                g_warning ("%s No child found for %s",
+-                           G_STRLOC, child_node->name);
+-                iter = g_sequence_iter_next (iter);
+-                continue;
+-            }
+-
+-            if (child_node != payload_node) {
+-            }
+-
+-            show_child (cluster, child);
+-            iter = g_sequence_iter_next (iter);
+-        }
+-#endif
+ 
+         priv->shown_child = NULL;
+         return;
+diff --git a/src/hrn-view.c b/src/hrn-view.c
+index 619be53..87e4264 100644
+--- a/src/hrn-view.c
++++ b/src/hrn-view.c
+@@ -826,7 +826,6 @@ child_activated (HrnTileable      *tileable,
+     g_signal_emit (view, signals[ACTIVATED], 0, action, payload);
+ }
+ 
+-#if 0
+ static void
+ child_count_changed (HrnTileable *tileable,
+                      int          old_count,
+@@ -839,6 +838,7 @@ child_count_changed (HrnTileable *tileable,
+     clutter_actor_queue_relayout ((ClutterActor *) view);
+ }
+ 
++#if 0
+ static guint
+ layout_view (HrnView *view)
+ {
+@@ -1118,6 +1118,8 @@ add_child (HrnTiler       *tiler,
+ 
+     g_signal_connect (actor, "activated",
+                       G_CALLBACK (child_activated), view);
++    g_signal_connect (actor, "count-changed",
++                      G_CALLBACK (child_count_changed), view);
+     g_signal_connect (actor, "visibility-changed",
+                       G_CALLBACK (child_visibility_changed), view);
+ 
+--
+cgit v0.8.2
