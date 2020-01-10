@@ -39,7 +39,7 @@ The Moblin media player
 
 %prep
 %setup -q -n %{name}-%{sversion}
-%apply_patches
+%autopatch -p1
 
 %build
 NOCONFIGURE=1 ./autogen.sh
