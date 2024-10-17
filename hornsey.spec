@@ -10,7 +10,7 @@ Summary: The Moblin media player
 Group: Graphical desktop/Other
 Version: %{version}
 License: LGPLv2.1
-URL: http://www.moblin.org
+URL: https://www.moblin.org
 Release: %{release}
 Source0: %{name}-%{sversion}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
