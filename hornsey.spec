@@ -20,6 +20,11 @@ Patch0: hornsey-0.5-fix-6876-crash.patch
 Patch1: hornsey-0.5-fix-7358-scrollbar.patch
 Patch2: hornsey-0.5-fix-7807-cpu.patch
 Patch3: hornsey-0.5git20091030-new-clutter-gst.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: clutter-devel
 BuildRequires: clutter-gst-devel
 BuildRequires: clutter-gtk-devel
